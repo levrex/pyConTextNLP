@@ -24,13 +24,17 @@ def _get_fileobj(_file):
         _file = "file://"+_file
     return urllib.request.urlopen(_file, data=None)
 
-def get_items(_file):
-    f0 = _get_fileobj(_file)
+def get_items(_file, url):
+    if (url == True):
+        f0 = _get_fileobj(_file)
+    else :
+        f0 = open(_file, 'r').read()
     context_items =  [contextItem((d["Lex"],
                                    d["Type"],
                                    r"%s"%d["Regex"],
                                    d["Direction"])) for d in yaml.load_all(f0)]
-    f0.close()
+    if (url == True):
+        f0.close()
     return context_items
 
 
