@@ -31,7 +31,7 @@ class sentenceSplitter(object):
 
         self.defaultExceptions = ['.','Dr.','Mr.','Mrs.','Ms.','M.D.', 'D.O.',
                                'Ph.D.','D.M.D.','R.N.','B.A.','A.B.',
-                               'B.S.','M.S.','q.','viz.','e.g.']
+                               'B.S.','M.S.','q.','viz.','e.g.', 'i.a.', 'i.v.']
         self.exceptionTerms = set(())
 
         self.digits = set('0123456789')
@@ -77,7 +77,7 @@ class sentenceSplitter(object):
 
         while wordLoc < len(txt):
             currentWord = txt[wordLoc]
-            if currentWord[-1] in '.?!':
+            if currentWord[-1] in '.?!^':
                 if currentWord in  self.exceptionTerms:
                     wordLoc += 1
                 # per discussion with A.G. dropped this exception, since assuming numbers only use decimal points if there
